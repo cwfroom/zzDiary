@@ -56,7 +56,22 @@ namespace zzDiary
 
         private void NewButton_Click(object sender, EventArgs e)
         {
-            diary.CreateNewEntry();
+            EntryList.SelectedIndex =  diary.CreateNewEntry();
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            EntryList.SelectedIndex = diary.DeleteEntry(EntryList.SelectedIndex);
+        }
+
+        private void UpButton_Click(object sender, EventArgs e)
+        {
+            EntryList.SelectedIndex = diary.MoveUpEntry(EntryList.SelectedIndex);
+        }
+
+        private void DownButton_Click(object sender, EventArgs e)
+        {
+            EntryList.SelectedIndex = diary.MoveDownEntry(EntryList.SelectedIndex);
         }
     }
 }

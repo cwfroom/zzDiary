@@ -36,6 +36,9 @@
             this.DayBox = new System.Windows.Forms.TextBox();
             this.SaveButton = new System.Windows.Forms.Button();
             this.NewButton = new System.Windows.Forms.Button();
+            this.UpButton = new System.Windows.Forms.Button();
+            this.DownButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // EntryList
@@ -104,14 +107,14 @@
             this.SaveButton.Location = new System.Drawing.Point(1110, 626);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(91, 40);
-            this.SaveButton.TabIndex = 6;
+            this.SaveButton.TabIndex = 9;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // NewButton
             // 
-            this.NewButton.Location = new System.Drawing.Point(1110, 580);
+            this.NewButton.Location = new System.Drawing.Point(1110, 441);
             this.NewButton.Name = "NewButton";
             this.NewButton.Size = new System.Drawing.Size(91, 40);
             this.NewButton.TabIndex = 5;
@@ -119,11 +122,44 @@
             this.NewButton.UseVisualStyleBackColor = true;
             this.NewButton.Click += new System.EventHandler(this.NewButton_Click);
             // 
+            // UpButton
+            // 
+            this.UpButton.Location = new System.Drawing.Point(1110, 487);
+            this.UpButton.Name = "UpButton";
+            this.UpButton.Size = new System.Drawing.Size(91, 40);
+            this.UpButton.TabIndex = 6;
+            this.UpButton.Text = "Up";
+            this.UpButton.UseVisualStyleBackColor = true;
+            this.UpButton.Click += new System.EventHandler(this.UpButton_Click);
+            // 
+            // DownButton
+            // 
+            this.DownButton.Location = new System.Drawing.Point(1110, 533);
+            this.DownButton.Name = "DownButton";
+            this.DownButton.Size = new System.Drawing.Size(91, 40);
+            this.DownButton.TabIndex = 7;
+            this.DownButton.Text = "Down";
+            this.DownButton.UseVisualStyleBackColor = true;
+            this.DownButton.Click += new System.EventHandler(this.DownButton_Click);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(1110, 580);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(91, 40);
+            this.DeleteButton.TabIndex = 8;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.DeleteButton);
+            this.Controls.Add(this.DownButton);
+            this.Controls.Add(this.UpButton);
             this.Controls.Add(this.NewButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.DayBox);
@@ -154,6 +190,9 @@
         private System.Windows.Forms.TextBox DayBox;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button NewButton;
+        private System.Windows.Forms.Button UpButton;
+        private System.Windows.Forms.Button DownButton;
+        private System.Windows.Forms.Button DeleteButton;
     }
 }
 

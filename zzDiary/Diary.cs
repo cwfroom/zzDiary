@@ -171,7 +171,7 @@ namespace zzDiary
             SaveFile();   
         }
 
-        public void CreateNewEntry()
+        public int CreateNewEntry()
         {
             Entry newEntry = new Entry(currentDay, "", "");
             int i;
@@ -185,8 +185,46 @@ namespace zzDiary
 
             currentList.List.Insert(i, newEntry);
             DisplayList.Insert(i,GetDisplayTitle(newEntry));
+            return i;
         }
 
+        public int MoveUpEntry(int index)
+        {
+            if (index > 0)
+            {
+                SwapEntry(index, index - 1);
+                return index - 1;
+            }
+            return index;
+        }
+
+        public int MoveDownEntry(int index)
+        {
+            if (index < currentList.List.Count-1)
+            {
+                SwapEntry(index, index + 1);
+                return index + 1;
+            }
+            return index;
+            
+        }
+
+        private void SwapEntry(int a, int b)
+        {
+            Entry tempEntry = currentList.List[a];
+            string tempTitle = DisplayList[a];
+            currentList.List[a] = currentList.List[b];
+            DisplayList[a] = DisplayList[b];
+            currentList.List[b] = tempEntry;
+            DisplayList[b] = tempTitle;
+        }
+
+        public int DeleteEntry(int index)
+        {
+            currentList.List.RemoveAt(index);
+            DisplayList.RemoveAt(index);
+            return index - 1;
+        }
 
         public void SaveEdit(int index, string day, string title, string content)
         {
