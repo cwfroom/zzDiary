@@ -205,6 +205,7 @@ namespace zzDiary
             this.ParseButton.TabIndex = 13;
             this.ParseButton.Text = "Parse";
             this.ParseButton.UseVisualStyleBackColor = true;
+            this.ParseButton.Click += new System.EventHandler(this.ParseButton_Click);
             // 
             // MainWindow
             // 

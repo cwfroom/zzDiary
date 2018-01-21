@@ -109,18 +109,23 @@ namespace zzDiary
             mainWindow = new MainWindow(this);
             return mainWindow;
         }
-        
-        private void SetCurrentDate(int year,int month,int day)
+
+        public void SetCurrentMonth(int year, int month)
         {
             currentYear = year;
             currentMonth = month;
-            currentDay = day;
-            currentYearStr = (year%100).ToString("D2");
+            currentYearStr = (year % 100).ToString("D2");
             currentMonthStr = month.ToString("D2");
-            currentDayStr = day.ToString("D2");
-
+            
             currentYearPath = config.DataPath + "\\" + currentYear;
             currentMonthPath = config.DataPath + "\\" + currentYear + "\\" + currentMonthStr + ".zzd";
+        }
+
+        private void SetCurrentDate(int year,int month,int day)
+        {
+            SetCurrentMonth(year, month);
+            currentDay = day;
+            currentDayStr = day.ToString("D2");
         }
 
         public void FirstLoad()
@@ -131,11 +136,10 @@ namespace zzDiary
             mainWindow.BindList(DisplayList);
             mainWindow.SetYearMonth(yearList, monthList);
         }
-
+        
         public void LoadMonth()
         {
-            Console.WriteLine(currentMonthPath);
-
+            
             if (!File.Exists(currentMonthPath))
             {
                 CreateNewMonth();
