@@ -1,4 +1,7 @@
-﻿namespace zzDiary
+﻿using System;
+using System.Windows.Forms;
+
+namespace zzDiary
 {
     partial class MainWindow
     {
@@ -39,6 +42,11 @@
             this.UpButton = new System.Windows.Forms.Button();
             this.DownButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
+            this.StatusStrip = new System.Windows.Forms.StatusStrip();
+            this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.YearList = new System.Windows.Forms.ListBox();
+            this.MonthList = new System.Windows.Forms.ListBox();
+            this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // EntryList
@@ -48,7 +56,7 @@
             this.EntryList.Location = new System.Drawing.Point(12, 12);
             this.EntryList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.EntryList.Name = "EntryList";
-            this.EntryList.Size = new System.Drawing.Size(296, 654);
+            this.EntryList.Size = new System.Drawing.Size(296, 629);
             this.EntryList.TabIndex = 1;
             this.EntryList.SelectedIndexChanged += new System.EventHandler(this.EntryList_SelectedIndexChanged);
             // 
@@ -68,7 +76,7 @@
             this.ContentBox.Multiline = true;
             this.ContentBox.Name = "ContentBox";
             this.ContentBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ContentBox.Size = new System.Drawing.Size(747, 616);
+            this.ContentBox.Size = new System.Drawing.Size(747, 589);
             this.ContentBox.TabIndex = 4;
             // 
             // YearBox
@@ -104,7 +112,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(1110, 626);
+            this.SaveButton.Location = new System.Drawing.Point(1115, 599);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(91, 40);
             this.SaveButton.TabIndex = 9;
@@ -114,7 +122,7 @@
             // 
             // NewButton
             // 
-            this.NewButton.Location = new System.Drawing.Point(1110, 441);
+            this.NewButton.Location = new System.Drawing.Point(1115, 414);
             this.NewButton.Name = "NewButton";
             this.NewButton.Size = new System.Drawing.Size(91, 40);
             this.NewButton.TabIndex = 5;
@@ -124,7 +132,7 @@
             // 
             // UpButton
             // 
-            this.UpButton.Location = new System.Drawing.Point(1110, 487);
+            this.UpButton.Location = new System.Drawing.Point(1115, 460);
             this.UpButton.Name = "UpButton";
             this.UpButton.Size = new System.Drawing.Size(91, 40);
             this.UpButton.TabIndex = 6;
@@ -134,7 +142,7 @@
             // 
             // DownButton
             // 
-            this.DownButton.Location = new System.Drawing.Point(1110, 533);
+            this.DownButton.Location = new System.Drawing.Point(1115, 506);
             this.DownButton.Name = "DownButton";
             this.DownButton.Size = new System.Drawing.Size(91, 40);
             this.DownButton.TabIndex = 7;
@@ -144,7 +152,7 @@
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(1110, 580);
+            this.DeleteButton.Location = new System.Drawing.Point(1115, 553);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(91, 40);
             this.DeleteButton.TabIndex = 8;
@@ -152,11 +160,49 @@
             this.DeleteButton.UseVisualStyleBackColor = true;
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
+            // StatusStrip
+            // 
+            this.StatusStrip.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.StatusLabel});
+            this.StatusStrip.Location = new System.Drawing.Point(0, 655);
+            this.StatusStrip.Name = "StatusStrip";
+            this.StatusStrip.Size = new System.Drawing.Size(1264, 26);
+            this.StatusStrip.TabIndex = 10;
+            this.StatusStrip.Text = "Status";
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(57, 21);
+            this.StatusLabel.Text = "Status";
+            // 
+            // YearList
+            // 
+            this.YearList.FormattingEnabled = true;
+            this.YearList.ItemHeight = 25;
+            this.YearList.Location = new System.Drawing.Point(1078, 13);
+            this.YearList.Name = "YearList";
+            this.YearList.Size = new System.Drawing.Size(66, 329);
+            this.YearList.TabIndex = 11;
+            // 
+            // MonthList
+            // 
+            this.MonthList.FormattingEnabled = true;
+            this.MonthList.ItemHeight = 25;
+            this.MonthList.Location = new System.Drawing.Point(1169, 13);
+            this.MonthList.Name = "MonthList";
+            this.MonthList.Size = new System.Drawing.Size(66, 329);
+            this.MonthList.TabIndex = 12;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.MonthList);
+            this.Controls.Add(this.YearList);
+            this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.DownButton);
             this.Controls.Add(this.UpButton);
@@ -169,6 +215,8 @@
             this.Controls.Add(this.TitleBox);
             this.Controls.Add(this.EntryList);
             this.Font = new System.Drawing.Font("Microsoft YaHei", 14F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1280, 720);
@@ -176,10 +224,14 @@
             this.Name = "MainWindow";
             this.Text = "zzDiary";
             this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainWindowKeyPress);
+            this.StatusStrip.ResumeLayout(false);
+            this.StatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
 
         #endregion
         private System.Windows.Forms.ListBox EntryList;
@@ -193,6 +245,10 @@
         private System.Windows.Forms.Button UpButton;
         private System.Windows.Forms.Button DownButton;
         private System.Windows.Forms.Button DeleteButton;
+        private StatusStrip StatusStrip;
+        private ToolStripStatusLabel StatusLabel;
+        private ListBox YearList;
+        private ListBox MonthList;
     }
 }
 

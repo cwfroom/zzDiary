@@ -22,7 +22,7 @@ namespace zzDiary
         
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            diary.FirstLoad();
+            diary.FirstLoad();            
         }
 
         public void UpdateDate(string year, string month, string day)
@@ -72,6 +72,25 @@ namespace zzDiary
         private void DownButton_Click(object sender, EventArgs e)
         {
             EntryList.SelectedIndex = diary.MoveDownEntry(EntryList.SelectedIndex);
+        }
+
+        private void MainWindowKeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.KeyDown += new KeyEventHandler(this.MainWindowKeyDown);
+           
+        }
+
+        private void MainWindowKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                diary.SaveEdit(EntryList.SelectedIndex, DayBox.Text, TitleBox.Text, ContentBox.Text);
+            }
+        }
+
+        public void UpdateStatus(string status)
+        {
+            StatusLabel.Text = status + " " + DateTime.Now.ToLongTimeString();
         }
     }
 }

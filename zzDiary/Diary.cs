@@ -115,6 +115,7 @@ namespace zzDiary
             SetCurrentDate(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             mainWindow.UpdateDate(currentYearStr,currentMonthStr,currentDayStr);
             LoadMonth();
+            mainWindow.BindList(DisplayList);
         }
 
         public void LoadMonth()
@@ -136,8 +137,8 @@ namespace zzDiary
                 DisplayList.Add(GetDisplayTitle(entry));
             }
 
-            mainWindow.BindList(DisplayList);
 
+            mainWindow.UpdateStatus("Loaded from " + currentMonthPath);
         }
 
         private string GetDisplayTitle(Entry entry)
@@ -244,6 +245,7 @@ namespace zzDiary
                 JsonSerializer js = new JsonSerializer();
                 js.Serialize(sw, currentList);
             }
+            mainWindow.UpdateStatus("Saved to " + currentMonthPath);
 
         }
         
