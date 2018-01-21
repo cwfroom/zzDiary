@@ -187,6 +187,7 @@ namespace zzDiary
             this.YearList.Name = "YearList";
             this.YearList.Size = new System.Drawing.Size(80, 304);
             this.YearList.TabIndex = 11;
+            
             // 
             // MonthList
             // 

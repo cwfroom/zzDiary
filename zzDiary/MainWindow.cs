@@ -39,8 +39,11 @@ namespace zzDiary
 
         public void SetYearMonth(int[] years, int[] months)
         {
+
             YearList.DataSource = years;
             MonthList.DataSource = months;
+            this.YearList.SelectedIndexChanged += new System.EventHandler(this.YearList_SelectedIndexChanged);
+            this.MonthList.SelectedIndexChanged += new System.EventHandler(this.MonthList_SelectedIndexChanged);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -103,6 +106,18 @@ namespace zzDiary
         {
             ParseWindow pw = new ParseWindow(diary);
             pw.ShowDialog();
+        }
+
+        private void YearList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            diary.SetCurrentYear(Int32.Parse(YearList.SelectedItem.ToString()));
+            diary.LoadMonth();
+        }
+
+        private void MonthList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            diary.SetCurrentMonth(Int32.Parse(MonthList.SelectedItem.ToString()));
+            diary.LoadMonth();
         }
     }
 }

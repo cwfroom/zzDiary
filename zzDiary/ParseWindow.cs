@@ -49,7 +49,7 @@ namespace zzDiary
                             string monthStr = date.Substring(2, 2);
                             int yearInt = Int32.Parse(yearStr) + 2000;
                             int monthInt = Int32.Parse(monthStr);
-                            diary.SetCurrentMonth(yearInt, monthInt);
+                            diary.SetCurrentYearMonth(yearInt, monthInt);
                             diary.LoadMonth();
                             AddLog("Setting Year = " + yearInt + " Month = " + monthInt);
                         }
@@ -79,9 +79,9 @@ namespace zzDiary
                             diary.SaveEdit(entryIndex, dayStr, title, utf8);
                         }
 
-                        
+                        diary.SortList();
 
-                    AddLog("--------");
+                        AddLog("--------");
 
                     }
                     

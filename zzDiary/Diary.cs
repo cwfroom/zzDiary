@@ -110,7 +110,17 @@ namespace zzDiary
             return mainWindow;
         }
 
-        public void SetCurrentMonth(int year, int month)
+        public void SetCurrentYear(int year)
+        {
+            SetCurrentYearMonth(year, currentMonth);
+        }
+
+        public void SetCurrentMonth(int month)
+        {
+            SetCurrentYearMonth(currentYear, month);
+        }
+
+        public void SetCurrentYearMonth(int year, int month)
         {
             currentYear = year;
             currentMonth = month;
@@ -123,7 +133,7 @@ namespace zzDiary
 
         private void SetCurrentDate(int year,int month,int day)
         {
-            SetCurrentMonth(year, month);
+            SetCurrentYearMonth(year, month);
             currentDay = day;
             currentDayStr = day.ToString("D2");
         }
@@ -133,7 +143,7 @@ namespace zzDiary
             SetCurrentDate(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             mainWindow.UpdateDate(currentYearStr,currentMonthStr,currentDayStr);
             LoadMonth();
-            mainWindow.BindList(DisplayList);
+            
             mainWindow.SetYearMonth(yearList, monthList);
         }
         
@@ -148,13 +158,14 @@ namespace zzDiary
             {
                 currentList = JsonConvert.DeserializeObject<EntryList>(File.ReadAllText(currentMonthPath));
             }
+            
 
             DisplayList = new BindingList<string>();
             foreach (Entry entry in currentList.List)
             {
                 DisplayList.Add(GetDisplayTitle(entry));
             }
-
+            mainWindow.BindList(DisplayList);
 
             mainWindow.UpdateStatus("Loaded from " + currentMonthPath);
         }
@@ -179,9 +190,7 @@ namespace zzDiary
 
         public void CreateNewMonth()
         {
-            Entry dummyEntry = new Entry();
             currentList = new EntryList(currentYear,currentMonth);
-            currentList.List.Add(dummyEntry);
 
             if (!Directory.Exists(currentYearPath)){
                 Directory.CreateDirectory(currentYearPath);
@@ -267,6 +276,15 @@ namespace zzDiary
 
         }
         
+        public void SortList()
+        {
+            currentList.List.Sort(delegate (Entry a, Entry b)
+            {
+                return a.Day.CompareTo(b.Day);
+            });
+
+            SaveFile();
+        }
 
     }
 }
