@@ -46,6 +46,7 @@ namespace zzDiary
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.YearList = new System.Windows.Forms.ListBox();
             this.MonthList = new System.Windows.Forms.ListBox();
+            this.ParseButton = new System.Windows.Forms.Button();
             this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,7 +184,7 @@ namespace zzDiary
             this.YearList.ItemHeight = 25;
             this.YearList.Location = new System.Drawing.Point(1078, 13);
             this.YearList.Name = "YearList";
-            this.YearList.Size = new System.Drawing.Size(66, 329);
+            this.YearList.Size = new System.Drawing.Size(80, 304);
             this.YearList.TabIndex = 11;
             // 
             // MonthList
@@ -192,14 +193,24 @@ namespace zzDiary
             this.MonthList.ItemHeight = 25;
             this.MonthList.Location = new System.Drawing.Point(1169, 13);
             this.MonthList.Name = "MonthList";
-            this.MonthList.Size = new System.Drawing.Size(66, 329);
+            this.MonthList.Size = new System.Drawing.Size(80, 304);
             this.MonthList.TabIndex = 12;
+            // 
+            // ParseButton
+            // 
+            this.ParseButton.Location = new System.Drawing.Point(1115, 368);
+            this.ParseButton.Name = "ParseButton";
+            this.ParseButton.Size = new System.Drawing.Size(91, 40);
+            this.ParseButton.TabIndex = 13;
+            this.ParseButton.Text = "Parse";
+            this.ParseButton.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.ParseButton);
             this.Controls.Add(this.MonthList);
             this.Controls.Add(this.YearList);
             this.Controls.Add(this.StatusStrip);
@@ -249,6 +260,7 @@ namespace zzDiary
         private ToolStripStatusLabel StatusLabel;
         private ListBox YearList;
         private ListBox MonthList;
+        private Button ParseButton;
     }
 }
 

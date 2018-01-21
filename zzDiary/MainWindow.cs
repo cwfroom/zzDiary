@@ -37,6 +37,12 @@ namespace zzDiary
             EntryList.DataSource = list;
         }
 
+        public void SetYearMonth(int[] years, int[] months)
+        {
+            YearList.DataSource = years;
+            MonthList.DataSource = months;
+        }
+
         private void SaveButton_Click(object sender, EventArgs e)
         {
             diary.SaveEdit(EntryList.SelectedIndex, DayBox.Text, TitleBox.Text, ContentBox.Text);

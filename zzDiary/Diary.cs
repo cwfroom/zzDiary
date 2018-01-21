@@ -73,8 +73,8 @@ namespace zzDiary
         private string currentYearPath;
         private string currentMonthPath;
 
-        private List<int> yearList;
-        private List<int> monthList;
+        private int[] yearList;
+        private int[] monthList;
 
         private MainWindow mainWindow;
         
@@ -86,6 +86,19 @@ namespace zzDiary
             {
                 MessageBox.Show("Failed to load configuration file", "Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 Environment.Exit(1);
+            }
+
+            int NowYear = DateTime.Now.Year;
+            yearList = new int[NowYear - config.FirstYear + 1];
+            for (int i = 0; i < yearList.Length; i++)
+            {
+                yearList[i] = NowYear - i;
+            }
+
+            monthList = new int[12];
+            for (int i = 0; i < 12; i++)
+            {
+                monthList[i] = i + 1;
             }
             
         }
@@ -116,6 +129,7 @@ namespace zzDiary
             mainWindow.UpdateDate(currentYearStr,currentMonthStr,currentDayStr);
             LoadMonth();
             mainWindow.BindList(DisplayList);
+            mainWindow.SetYearMonth(yearList, monthList);
         }
 
         public void LoadMonth()
