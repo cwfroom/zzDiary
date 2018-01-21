@@ -31,6 +31,7 @@ namespace zzDiary
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.EntryList = new System.Windows.Forms.ListBox();
             this.TitleBox = new System.Windows.Forms.TextBox();
             this.ContentBox = new System.Windows.Forms.TextBox();
@@ -227,6 +228,7 @@ namespace zzDiary
             this.Controls.Add(this.EntryList);
             this.Font = new System.Drawing.Font("Microsoft YaHei", 14F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
