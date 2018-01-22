@@ -122,20 +122,22 @@ namespace zzDiary
 
         public void SetCurrentYearMonth(int year, int month)
         {
-            currentYear = year;
-            currentMonth = month;
-            currentYearStr = (year % 100).ToString("D2");
-            currentMonthStr = month.ToString("D2");
-            
-            currentYearPath = config.DataPath + "\\" + currentYear;
-            currentMonthPath = config.DataPath + "\\" + currentYear + "\\" + currentMonthStr + ".zzd";
+            SetCurrentDate(year, month, currentDay);
         }
 
         private void SetCurrentDate(int year,int month,int day)
         {
-            SetCurrentYearMonth(year, month);
+            currentYear = year;
+            currentMonth = month;
             currentDay = day;
+            currentYearStr = (year % 100).ToString("D2");
+            currentMonthStr = month.ToString("D2");
             currentDayStr = day.ToString("D2");
+            currentYearPath = config.DataPath + "\\" + currentYear;
+            currentMonthPath = config.DataPath + "\\" + currentYear + "\\" + currentMonthStr + ".zzd";
+
+            mainWindow.UpdateDate(currentYearStr, currentMonthStr, currentDayStr);
+            
         }
 
         public void FirstLoad()

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections;
+using Xceed.Words.NET;
 
 namespace zzDiary
 {
@@ -25,6 +27,8 @@ namespace zzDiary
 
         private void ParseButton_Click(object sender, EventArgs e)
         {
+            LogBox.Text = "";
+
             if (YearBox.Text != "" && MonthBox.Text != "")
             {
                 string monthPath = parsePath + "\\" + YearBox.Text + "\\" + MonthBox.Text + "\\";
@@ -39,7 +43,7 @@ namespace zzDiary
                     
                     string [] split = fileName.Split(dividers);
                     
-                    if (split.Length > 0)
+                    if (split.Length > 1)
                     {
                         string date = split[1];
                         AddLog("Date = " + date);
@@ -58,26 +62,56 @@ namespace zzDiary
                         AddLog("Day = " + dayInt);
 
                         string title = split[2].Split('.')[0];
+
+                        if (title.Length > 0 && title.ToCharArray()[0] == ' ')
+                        {
+                            title = title.Substring(1);
+                        }
+
                         string extension = split[2].Split('.')[1];
                         AddLog("Title = " + title);
                         AddLog("Extension = " + extension);
-
-                        byte[] contentRaw = File.ReadAllBytes(filePath);
-
-                        string gbk = System.Text.Encoding.GetEncoding(936).GetString(contentRaw);
-                        string utf8 = System.Text.Encoding.UTF8.GetString(contentRaw);
-
-                        int entryIndex = diary.CreateNewEntry();
-                        if (utf8.Contains('�'))
+                        
+                        if (extension == "txt")
                         {
-                            AddLog(gbk);
-                            diary.SaveEdit(entryIndex, dayStr, title, gbk);
-                        }
-                        else
+                            byte[] contentRaw = File.ReadAllBytes(filePath);
+
+                            string gbk = System.Text.Encoding.GetEncoding(936).GetString(contentRaw);
+                            string utf8 = System.Text.Encoding.UTF8.GetString(contentRaw);
+
+                            int entryIndex = diary.CreateNewEntry();
+                            if (utf8.Contains('�'))
+                            {
+                                AddLog(gbk);
+                                diary.SaveEdit(entryIndex, dayStr, title, gbk);
+                            }
+                            else
+                            {
+                                AddLog(utf8);
+                                diary.SaveEdit(entryIndex, dayStr, title, utf8);
+                            }
+                        }else if (extension == "docx")
                         {
-                            AddLog(utf8);
-                            diary.SaveEdit(entryIndex, dayStr, title, utf8);
+                            string content = "";
+
+                            using (DocX document = DocX.Load(File.OpenRead(filePath)))
+                            {
+                                for (int j= 0; j < document.Paragraphs.Count; j++)
+                                {
+                                    Paragraph p = document.Paragraphs.ElementAt(j);
+                                    content += p.Text;
+                                    content += "\r\n";
+                                }
+                                
+                            }
+
+                            int entryIndex = diary.CreateNewEntry();
+                            AddLog(content);
+                            diary.SaveEdit(entryIndex, dayStr, title, content);
+                            
                         }
+
+                        
 
                         diary.SortList();
 
