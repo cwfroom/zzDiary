@@ -17,7 +17,12 @@ namespace zzDiary
     {
         private Diary diary;
         private const string parsePath = "D:\\Dropbox\\Diary";
-        private char[] dividers = { '[', ']', '【', '】' };
+        private char[] dividers = { '[', ']', '【', '】' ,'(',')'};
+        private string[] chineseMonth = {
+            "一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"
+        };
+
+
 
         public ParseWindow(Diary _diary)
         {
@@ -31,9 +36,21 @@ namespace zzDiary
 
             if (YearBox.Text != "" && MonthBox.Text != "")
             {
-                string monthPath = parsePath + "\\" + YearBox.Text + "\\" + MonthBox.Text + "\\";
+                string monthPath = "";
+
+                if (ChineseCheckBox.Checked)
+                {
+                    monthPath = parsePath + "\\" + YearBox.Text + "\\" + chineseMonth[Int32.Parse(MonthBox.Text)-1] + "\\";
+                }
+                else
+                {
+                    monthPath = parsePath + "\\" + YearBox.Text + "\\" + MonthBox.Text + "\\";
+                }
+
+                
                 AddLog("Opening " + monthPath);
                 string [] allFiles = Directory.GetFiles(monthPath);
+                bool monthSet = false;
                 
                 for (int i = 0; i < allFiles.Length; i++)
                 {
@@ -43,11 +60,11 @@ namespace zzDiary
                     
                     string [] split = fileName.Split(dividers);
                     
-                    if (split.Length > 1)
+                    if (split.Length > 2)
                     {
                         string date = split[1];
                         AddLog("Date = " + date);
-                        if (i == 0)
+                        if (!monthSet)
                         {
                             string yearStr = date.Substring(0, 2);
                             string monthStr = date.Substring(2, 2);
@@ -55,6 +72,7 @@ namespace zzDiary
                             int monthInt = Int32.Parse(monthStr);
                             diary.SetCurrentYearMonth(yearInt, monthInt);
                             diary.LoadMonth();
+                            monthSet = true;
                             AddLog("Setting Year = " + yearInt + " Month = " + monthInt);
                         }
                         string dayStr = date.Substring(4, 2);
@@ -109,6 +127,9 @@ namespace zzDiary
                             AddLog(content);
                             diary.SaveEdit(entryIndex, dayStr, title, content);
                             
+                        }else if (extension == "doc")
+                        {
+
                         }
 
                         

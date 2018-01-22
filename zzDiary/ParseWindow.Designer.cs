@@ -33,6 +33,7 @@
             this.MonthBox = new System.Windows.Forms.TextBox();
             this.LogBox = new System.Windows.Forms.TextBox();
             this.ParseButton = new System.Windows.Forms.Button();
+            this.ChineseCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // YearBox
@@ -70,11 +71,22 @@
             this.ParseButton.UseVisualStyleBackColor = true;
             this.ParseButton.Click += new System.EventHandler(this.ParseButton_Click);
             // 
+            // ChineseCheckBox
+            // 
+            this.ChineseCheckBox.AutoSize = true;
+            this.ChineseCheckBox.Location = new System.Drawing.Point(13, 90);
+            this.ChineseCheckBox.Name = "ChineseCheckBox";
+            this.ChineseCheckBox.Size = new System.Drawing.Size(104, 29);
+            this.ChineseCheckBox.TabIndex = 4;
+            this.ChineseCheckBox.Text = "Chinese";
+            this.ChineseCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ParseWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.ChineseCheckBox);
             this.Controls.Add(this.ParseButton);
             this.Controls.Add(this.LogBox);
             this.Controls.Add(this.MonthBox);
@@ -99,5 +111,6 @@
         private System.Windows.Forms.TextBox MonthBox;
         private System.Windows.Forms.TextBox LogBox;
         private System.Windows.Forms.Button ParseButton;
+        private System.Windows.Forms.CheckBox ChineseCheckBox;
     }
 }

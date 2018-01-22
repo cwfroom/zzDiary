@@ -204,6 +204,7 @@ namespace zzDiary
         public int CreateNewEntry()
         {
             Entry newEntry = new Entry(currentDay, "", "");
+            /*
             int i;
             for (i = 0; i < currentList.List.Count; i++)
             {
@@ -215,7 +216,10 @@ namespace zzDiary
 
             currentList.List.Insert(i, newEntry);
             DisplayList.Insert(i,GetDisplayTitle(newEntry));
-            return i;
+            */
+            currentList.List.Add(newEntry);
+            DisplayList.Add(GetDisplayTitle(newEntry));
+            return currentList.List.Count - 1;
         }
 
         public int MoveUpEntry(int index)
