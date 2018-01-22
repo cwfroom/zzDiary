@@ -1,4 +1,4 @@
 ﻿{
-  "path": "D:\\Dropbox\\Diary\\Data",
-  "start" : "2002"
+  "DataPath": "D:\\Dropbox\\Diary\\Data",
+  "FirstYear" : "2002"
 }
