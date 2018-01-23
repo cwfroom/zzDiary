@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections;
 using Xceed.Words.NET;
+using System.Diagnostics;
 
 namespace zzDiary
 {
@@ -92,43 +93,14 @@ namespace zzDiary
                         
                         if (extension == "txt")
                         {
-                            byte[] contentRaw = File.ReadAllBytes(filePath);
-
-                            string gbk = System.Text.Encoding.GetEncoding(936).GetString(contentRaw);
-                            string utf8 = System.Text.Encoding.UTF8.GetString(contentRaw);
-
-                            int entryIndex = diary.CreateNewEntry();
-                            if (utf8.Contains('�'))
-                            {
-                                AddLog(gbk);
-                                diary.SaveEdit(entryIndex, dayStr, title, gbk);
-                            }
-                            else
-                            {
-                                AddLog(utf8);
-                                diary.SaveEdit(entryIndex, dayStr, title, utf8);
-                            }
+                            parseTxt(filePath, dayStr, title);
                         }else if (extension == "docx")
                         {
-                            string content = "";
-
-                            using (DocX document = DocX.Load(File.OpenRead(filePath)))
-                            {
-                                for (int j= 0; j < document.Paragraphs.Count; j++)
-                                {
-                                    Paragraph p = document.Paragraphs.ElementAt(j);
-                                    content += p.Text;
-                                    content += "\r\n";
-                                }
-                                
-                            }
-
-                            int entryIndex = diary.CreateNewEntry();
-                            AddLog(content);
-                            diary.SaveEdit(entryIndex, dayStr, title, content);
+                            parseDocx(filePath, dayStr, title);
                             
                         }else if (extension == "doc")
                         {
+                           
 
                         }
 
@@ -143,6 +115,46 @@ namespace zzDiary
                 }
 
             }
+        }
+
+        private void parseTxt(string filePath,string dayStr,string title)
+        {
+            byte[] contentRaw = File.ReadAllBytes(filePath);
+
+            string gbk = System.Text.Encoding.GetEncoding(936).GetString(contentRaw);
+            string utf8 = System.Text.Encoding.UTF8.GetString(contentRaw);
+
+            int entryIndex = diary.CreateNewEntry();
+            if (utf8.Contains('�'))
+            {
+                AddLog(gbk);
+                diary.SaveEdit(entryIndex, dayStr, title, gbk);
+            }
+            else
+            {
+                AddLog(utf8);
+                diary.SaveEdit(entryIndex, dayStr, title, utf8);
+            }
+        }
+
+        private void parseDocx(string filePath, string dayStr,string title)
+        {
+            string content = "";
+
+            using (DocX document = DocX.Load(File.OpenRead(filePath)))
+            {
+                for (int j = 0; j < document.Paragraphs.Count; j++)
+                {
+                    Paragraph p = document.Paragraphs.ElementAt(j);
+                    content += p.Text;
+                    content += "\r\n";
+                }
+
+            }
+
+            int entryIndex = diary.CreateNewEntry();
+            AddLog(content);
+            diary.SaveEdit(entryIndex, dayStr, title, content);
         }
 
         private void AddLog(string text)
