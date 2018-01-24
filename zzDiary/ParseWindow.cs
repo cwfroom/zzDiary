@@ -11,6 +11,7 @@ using System.IO;
 using System.Collections;
 using Xceed.Words.NET;
 using System.Diagnostics;
+using Microsoft.Office.Interop.Word;
 
 namespace zzDiary
 {
@@ -60,7 +61,9 @@ namespace zzDiary
                     AddLog("Parsing " + fileName);
                     
                     string [] split = fileName.Split(dividers);
-                    
+
+                    Microsoft.Office.Interop.Word.Application wordApp = null;
+
                     if (split.Length > 2)
                     {
                         string date = split[1];
@@ -100,16 +103,24 @@ namespace zzDiary
                             
                         }else if (extension == "doc")
                         {
+                            if (wordApp == null)
+                            {
+                                wordApp = new Microsoft.Office.Interop.Word.Application();
+                            }
+                            parseDoc(wordApp, filePath, dayStr, title);   
                            
-
+                           
                         }
-
                         
-
                         diary.SortList();
 
                         AddLog("--------");
 
+                    }
+
+                    if (wordApp != null)
+                    {
+                        wordApp.Quit();
                     }
                     
                 }
@@ -145,7 +156,7 @@ namespace zzDiary
             {
                 for (int j = 0; j < document.Paragraphs.Count; j++)
                 {
-                    Paragraph p = document.Paragraphs.ElementAt(j);
+                    Xceed.Words.NET.Paragraph p = document.Paragraphs.ElementAt(j);
                     content += p.Text;
                     content += "\r\n";
                 }
@@ -155,6 +166,17 @@ namespace zzDiary
             int entryIndex = diary.CreateNewEntry();
             AddLog(content);
             diary.SaveEdit(entryIndex, dayStr, title, content);
+        }
+
+        private void parseDoc(Microsoft.Office.Interop.Word.Application wordApp, string filePath, string dayStr, string title)
+        {
+            Document doc = wordApp.Documents.Open(filePath);
+            string content = doc.Range().Text;
+            content = content.Replace("\r", "\r\n");
+            int entryIndex = diary.CreateNewEntry();
+            AddLog(content);
+            diary.SaveEdit(entryIndex, dayStr, title, content);
+            doc.Close();
         }
 
         private void AddLog(string text)
