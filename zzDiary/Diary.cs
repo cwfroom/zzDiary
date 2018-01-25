@@ -289,6 +289,13 @@ namespace zzDiary
                 return a.Day.CompareTo(b.Day);
             });
 
+            DisplayList = new BindingList<string>();
+            foreach (Entry entry in currentList.List)
+            {
+                DisplayList.Add(GetDisplayTitle(entry));
+            }
+            mainWindow.BindList(DisplayList);
+
             SaveFile();
         }
 
