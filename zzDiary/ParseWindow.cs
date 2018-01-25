@@ -42,89 +42,89 @@ namespace zzDiary
 
                 if (ChineseCheckBox.Checked)
                 {
-                    monthPath = parsePath + "\\" + YearBox.Text + "\\" + chineseMonth[Int32.Parse(MonthBox.Text)-1] + "\\";
+                    monthPath = parsePath + "\\" + YearBox.Text + "\\" + chineseMonth[Int32.Parse(MonthBox.Text) - 1] + "\\";
                 }
                 else
                 {
                     monthPath = parsePath + "\\" + YearBox.Text + "\\" + MonthBox.Text + "\\";
                 }
 
-                
+
+                int yearInt = Int32.Parse(YearBox.Text.Substring(2, 2));
+                int monthInt = Int32.Parse(MonthBox.Text);
+
+                diary.SetCurrentYearMonth(yearInt, monthInt);
+                diary.LoadMonth();
+                AddLog("Setting Year = " + yearInt + " Month = " + monthInt);
+
                 AddLog("Opening " + monthPath);
-                string [] allFiles = Directory.GetFiles(monthPath);
-                bool monthSet = false;
-                
+                string[] allFiles = Directory.GetFiles(monthPath);
+
+                Microsoft.Office.Interop.Word.Application wordApp = null;
+
                 for (int i = 0; i < allFiles.Length; i++)
                 {
                     string filePath = allFiles[i];
                     string fileName = filePath.Replace(monthPath, "");
                     AddLog("Parsing " + fileName);
-                    
-                    string [] split = fileName.Split(dividers);
 
-                    Microsoft.Office.Interop.Word.Application wordApp = null;
+                    string[] split = fileName.Split(dividers);
 
+                    string date = "0";
+                    string dayStr = "0";
+                    string title = "";
+                    string extension = "";
                     if (split.Length > 2)
                     {
-                        string date = split[1];
-                        AddLog("Date = " + date);
-                        if (!monthSet)
-                        {
-                            string yearStr = date.Substring(0, 2);
-                            string monthStr = date.Substring(2, 2);
-                            int yearInt = Int32.Parse(yearStr) + 2000;
-                            int monthInt = Int32.Parse(monthStr);
-                            diary.SetCurrentYearMonth(yearInt, monthInt);
-                            diary.LoadMonth();
-                            monthSet = true;
-                            AddLog("Setting Year = " + yearInt + " Month = " + monthInt);
-                        }
-                        string dayStr = date.Substring(4, 2);
-                        int dayInt = Int32.Parse(dayStr);
-                        AddLog("Day = " + dayInt);
-
-                        string title = split[2].Split('.')[0];
-
-                        if (title.Length > 0 && title.ToCharArray()[0] == ' ')
-                        {
-                            title = title.Substring(1);
-                        }
-
-                        string extension = split[2].Split('.')[1];
-                        AddLog("Title = " + title);
-                        AddLog("Extension = " + extension);
-                        
-                        if (extension == "txt")
-                        {
-                            parseTxt(filePath, dayStr, title);
-                        }else if (extension == "docx")
-                        {
-                            parseDocx(filePath, dayStr, title);
-                            
-                        }else if (extension == "doc")
-                        {
-                            if (wordApp == null)
-                            {
-                                wordApp = new Microsoft.Office.Interop.Word.Application();
-                            }
-                            parseDoc(wordApp, filePath, dayStr, title);   
-                           
-                           
-                        }
-                        
-                        diary.SortList();
-
-                        AddLog("--------");
-
+                        date = split[1];
+                        dayStr = date.Substring(4, 2);
+                        title = split[2].Split('.')[0];
+                        extension = split[2].Split('.')[1];
                     }
-
-                    if (wordApp != null)
+                    else
                     {
-                        wordApp.Quit();
+                        title = fileName.Split('.')[0];
+                        extension = fileName.Split('.')[1];
+                    }
+                    int dayInt = Int32.Parse(dayStr);
+                    if (title.Length > 0 && title.ToCharArray()[0] == ' ')
+                    {
+                        title = title.Substring(1);
                     }
                     
+                    AddLog("Date = " + date);                    
+                    AddLog("Day = " + dayInt);
+                    AddLog("Title = " + title);
+                    AddLog("Extension = " + extension);
+
+                    if (extension == "txt")
+                    {
+                        parseTxt(filePath, dayStr, title);
+                    }
+                    else if (extension == "docx")
+                    {
+                        parseDocx(filePath, dayStr, title);
+
+                    }
+                    else if (extension == "doc")
+                    {
+                        if (wordApp == null)
+                        {
+                            wordApp = new Microsoft.Office.Interop.Word.Application();
+                        }
+                        parseDoc(wordApp, filePath, dayStr, title);
+                    }
+
                 }
 
+                diary.SortList();
+                AddLog("--------");
+
+                if (wordApp != null)
+                {
+                    wordApp.Quit();
+                }
+                
             }
         }
 
