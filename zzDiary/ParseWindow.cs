@@ -50,7 +50,7 @@ namespace zzDiary
                 }
 
 
-                int yearInt = Int32.Parse(YearBox.Text.Substring(2, 2));
+                int yearInt = Int32.Parse(YearBox.Text);
                 int monthInt = Int32.Parse(MonthBox.Text);
 
                 diary.SetCurrentYearMonth(yearInt, monthInt);
@@ -104,7 +104,6 @@ namespace zzDiary
                     else if (extension == "docx")
                     {
                         parseDocx(filePath, dayStr, title);
-
                     }
                     else if (extension == "doc")
                     {
@@ -158,7 +157,10 @@ namespace zzDiary
                 {
                     Xceed.Words.NET.Paragraph p = document.Paragraphs.ElementAt(j);
                     content += p.Text;
-                    content += "\r\n";
+                    if (j != document.Paragraphs.Count - 1)
+                    {
+                        content += "\r\n";
+                    }
                 }
 
             }
