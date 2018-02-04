@@ -137,16 +137,14 @@ namespace zzDiary
             currentMonthPath = config.DataPath + "\\" + currentYear + "\\" + currentMonthStr + ".zzd";
 
             mainWindow.UpdateDate(currentYearStr, currentMonthStr, currentDayStr);
-            
         }
 
         public void FirstLoad()
         {
+            mainWindow.SetYearMonth(yearList, monthList);
             SetCurrentDate(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             mainWindow.UpdateDate(currentYearStr,currentMonthStr,currentDayStr);
             LoadMonth();
-            
-            mainWindow.SetYearMonth(yearList, monthList);
         }
         
         public void LoadMonth()
@@ -160,7 +158,8 @@ namespace zzDiary
             {
                 currentList = JsonConvert.DeserializeObject<EntryList>(File.ReadAllText(currentMonthPath));
             }
-            
+
+            mainWindow.UpdateYearMonthList(System.Array.IndexOf(yearList, currentYear), System.Array.IndexOf(monthList, currentMonth)); 
 
             DisplayList = new BindingList<string>();
             foreach (Entry entry in currentList.List)

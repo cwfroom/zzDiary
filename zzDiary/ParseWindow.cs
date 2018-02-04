@@ -19,7 +19,7 @@ namespace zzDiary
     {
         private Diary diary;
         private const string parsePath = "D:\\Dropbox\\Diary";
-        private char[] dividers = { '[', ']', '【', '】' ,'(',')'};
+        private char[] dividers = { '[', ']', '【', '】' };
         private string[] chineseMonth = {
             "一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"
         };
@@ -74,7 +74,7 @@ namespace zzDiary
                     string dayStr = "0";
                     string title = "";
                     string extension = "";
-                    if (split.Length > 2)
+                    if (split.Length > 2 && System.Text.RegularExpressions.Regex.IsMatch(split[1], @"^\d+$"))
                     {
                         date = split[1];
                         dayStr = date.Substring(4, 2);
@@ -103,7 +103,12 @@ namespace zzDiary
                     }
                     else if (extension == "docx")
                     {
-                        parseDocx(filePath, dayStr, title);
+                        if (wordApp == null)
+                        {
+                            wordApp = new Microsoft.Office.Interop.Word.Application();
+                        }
+                        parseDoc(wordApp, filePath, dayStr, title);
+                        //parseDocx(filePath, dayStr, title);
                     }
                     else if (extension == "doc")
                     {

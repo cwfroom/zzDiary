@@ -119,5 +119,16 @@ namespace zzDiary
             diary.SetCurrentMonth(Int32.Parse(MonthList.SelectedItem.ToString()));
             diary.LoadMonth();
         }
+
+        public void UpdateYearMonthList(int yearIndex, int monthIndex)
+        {
+            YearList.SelectedIndex = yearIndex;
+            MonthList.SelectedIndex = monthIndex;
+        }
+
+        private void sortButton_Click(object sender, EventArgs e)
+        {
+            diary.SortList();
+        }
     }
 }

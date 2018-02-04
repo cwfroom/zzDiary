@@ -48,6 +48,7 @@ namespace zzDiary
             this.YearList = new System.Windows.Forms.ListBox();
             this.MonthList = new System.Windows.Forms.ListBox();
             this.ParseButton = new System.Windows.Forms.Button();
+            this.sortButton = new System.Windows.Forms.Button();
             this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,7 +115,7 @@ namespace zzDiary
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(1115, 599);
+            this.SaveButton.Location = new System.Drawing.Point(1067, 601);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(91, 40);
             this.SaveButton.TabIndex = 9;
@@ -124,7 +125,7 @@ namespace zzDiary
             // 
             // NewButton
             // 
-            this.NewButton.Location = new System.Drawing.Point(1115, 414);
+            this.NewButton.Location = new System.Drawing.Point(1067, 370);
             this.NewButton.Name = "NewButton";
             this.NewButton.Size = new System.Drawing.Size(91, 40);
             this.NewButton.TabIndex = 5;
@@ -134,7 +135,7 @@ namespace zzDiary
             // 
             // UpButton
             // 
-            this.UpButton.Location = new System.Drawing.Point(1115, 460);
+            this.UpButton.Location = new System.Drawing.Point(1067, 416);
             this.UpButton.Name = "UpButton";
             this.UpButton.Size = new System.Drawing.Size(91, 40);
             this.UpButton.TabIndex = 6;
@@ -144,7 +145,7 @@ namespace zzDiary
             // 
             // DownButton
             // 
-            this.DownButton.Location = new System.Drawing.Point(1115, 506);
+            this.DownButton.Location = new System.Drawing.Point(1067, 462);
             this.DownButton.Name = "DownButton";
             this.DownButton.Size = new System.Drawing.Size(91, 40);
             this.DownButton.TabIndex = 7;
@@ -154,7 +155,7 @@ namespace zzDiary
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(1115, 553);
+            this.DeleteButton.Location = new System.Drawing.Point(1067, 508);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(91, 40);
             this.DeleteButton.TabIndex = 8;
@@ -187,7 +188,6 @@ namespace zzDiary
             this.YearList.Name = "YearList";
             this.YearList.Size = new System.Drawing.Size(80, 304);
             this.YearList.TabIndex = 11;
-            
             // 
             // MonthList
             // 
@@ -200,7 +200,7 @@ namespace zzDiary
             // 
             // ParseButton
             // 
-            this.ParseButton.Location = new System.Drawing.Point(1115, 368);
+            this.ParseButton.Location = new System.Drawing.Point(1169, 601);
             this.ParseButton.Name = "ParseButton";
             this.ParseButton.Size = new System.Drawing.Size(91, 40);
             this.ParseButton.TabIndex = 13;
@@ -208,11 +208,22 @@ namespace zzDiary
             this.ParseButton.UseVisualStyleBackColor = true;
             this.ParseButton.Click += new System.EventHandler(this.ParseButton_Click);
             // 
+            // sortButton
+            // 
+            this.sortButton.Location = new System.Drawing.Point(1067, 555);
+            this.sortButton.Name = "sortButton";
+            this.sortButton.Size = new System.Drawing.Size(91, 40);
+            this.sortButton.TabIndex = 14;
+            this.sortButton.Text = "Sort";
+            this.sortButton.UseVisualStyleBackColor = true;
+            this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.sortButton);
             this.Controls.Add(this.ParseButton);
             this.Controls.Add(this.MonthList);
             this.Controls.Add(this.YearList);
@@ -265,6 +276,7 @@ namespace zzDiary
         private ListBox YearList;
         private ListBox MonthList;
         private Button ParseButton;
+        private Button sortButton;
     }
 }
 
