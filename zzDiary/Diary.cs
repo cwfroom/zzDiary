@@ -202,6 +202,7 @@ namespace zzDiary
 
         public int CreateNewEntry()
         {
+            SetCurrentDate(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             Entry newEntry = new Entry(currentDay, "", "");
             /*
             int i;
