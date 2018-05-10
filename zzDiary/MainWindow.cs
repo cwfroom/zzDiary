@@ -14,6 +14,7 @@ namespace zzDiary
     {
         private Diary diary;
         private bool contentChanged = false;
+        private int entryIndex = 0;
 
         public MainWindow(Diary _diary)
         {
@@ -41,7 +42,6 @@ namespace zzDiary
 
         public void SetYearMonth(int[] years, int[] months)
         {
-
             YearList.DataSource = years;
             MonthList.DataSource = months;
             this.YearList.SelectedIndexChanged += new System.EventHandler(this.YearList_SelectedIndexChanged);
@@ -53,14 +53,15 @@ namespace zzDiary
             diary.SaveEdit(EntryList.SelectedIndex, DayBox.Text, TitleBox.Text, ContentBox.Text);
         }
 
-        private void EntryList_SelectedIndexChanged(object sender, EventArgs e)
+        private void EntryList_Click(object sender, EventArgs e)
         {
             if (EntryList.SelectedIndex >=0)
             {
-                DisplayEntry(EntryList.SelectedIndex);
                 CheckContentChange();
+                DisplayEntry(EntryList.SelectedIndex);
+                entryIndex = EntryList.SelectedIndex;    
             }
-        }
+        }     
 
         private void NewButton_Click(object sender, EventArgs e)
         {
@@ -132,16 +133,32 @@ namespace zzDiary
             diary.SortList();
         }
 
+
+        private void DayBox_TextChanged(object sender, EventArgs e)
+        {
+            CheckEdit(DayBox);
+        }
+
+
+        private void TitleBox_TextChanged(object sender, EventArgs e)
+        {
+            CheckEdit(TitleBox);
+        }
+
         private void ContentBox_TextChanged(object sender, EventArgs e)
         {
-            if (ContentBox == ActiveControl)
+            CheckEdit(ContentBox);
+        }
+
+        private void CheckEdit(Control ctrl)
+        {
+            if (ctrl == ActiveControl)
             {
                 if (!contentChanged)
                 {
                     contentChanged = true;
                 }
             }
-
         }
 
         private void CheckContentChange()
@@ -149,7 +166,7 @@ namespace zzDiary
             if (contentChanged)
             {
                 contentChanged = false;
-                diary.SaveEdit(EntryList.SelectedIndex, DayBox.Text, TitleBox.Text, ContentBox.Text);
+                diary.SaveEdit(entryIndex, DayBox.Text, TitleBox.Text, ContentBox.Text);
             }
         }
 
@@ -160,7 +177,6 @@ namespace zzDiary
             TitleBox.Text = entry.Title;
             ContentBox.Text = entry.Content;
         }
-
 
     }
 }

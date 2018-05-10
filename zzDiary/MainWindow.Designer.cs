@@ -61,7 +61,7 @@ namespace zzDiary
             this.EntryList.Name = "EntryList";
             this.EntryList.Size = new System.Drawing.Size(296, 629);
             this.EntryList.TabIndex = 1;
-            this.EntryList.SelectedIndexChanged += new System.EventHandler(this.EntryList_SelectedIndexChanged);
+            this.EntryList.Click += new System.EventHandler(this.EntryList_Click);
             // 
             // TitleBox
             // 
@@ -70,6 +70,7 @@ namespace zzDiary
             this.TitleBox.Name = "TitleBox";
             this.TitleBox.Size = new System.Drawing.Size(653, 32);
             this.TitleBox.TabIndex = 3;
+            this.TitleBox.TextChanged += new System.EventHandler(this.TitleBox_TextChanged);
             // 
             // ContentBox
             // 
@@ -113,6 +114,7 @@ namespace zzDiary
             this.DayBox.Size = new System.Drawing.Size(29, 32);
             this.DayBox.TabIndex = 2;
             this.DayBox.Text = "00";
+            this.DayBox.TextChanged += new System.EventHandler(this.DayBox_TextChanged);
             // 
             // SaveButton
             // 
