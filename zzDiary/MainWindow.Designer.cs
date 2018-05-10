@@ -81,6 +81,7 @@ namespace zzDiary
             this.ContentBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ContentBox.Size = new System.Drawing.Size(747, 589);
             this.ContentBox.TabIndex = 4;
+            this.ContentBox.TextChanged += new System.EventHandler(this.ContentBox_TextChanged);
             // 
             // YearBox
             // 

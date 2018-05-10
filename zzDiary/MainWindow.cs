@@ -13,16 +13,18 @@ namespace zzDiary
     public partial class MainWindow : Form
     {
         private Diary diary;
+        private bool contentChanged = false;
 
         public MainWindow(Diary _diary)
         {
             diary = _diary;
             InitializeComponent();
         }
-        
+
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            diary.FirstLoad();            
+            diary.FirstLoad();
+            DisplayEntry(0);
         }
 
         public void UpdateDate(string year, string month, string day)
@@ -53,19 +55,16 @@ namespace zzDiary
 
         private void EntryList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (EntryList.SelectedIndex == -1)
+            if (EntryList.SelectedIndex >=0)
             {
-                return;
+                DisplayEntry(EntryList.SelectedIndex);
+                CheckContentChange();
             }
-            Entry entry = diary.LoadEntry(EntryList.SelectedIndex);
-            DayBox.Text = entry.Day.ToString("D2");
-            TitleBox.Text = entry.Title;
-            ContentBox.Text = entry.Content;
         }
 
         private void NewButton_Click(object sender, EventArgs e)
         {
-            EntryList.SelectedIndex =  diary.CreateNewEntry();
+            EntryList.SelectedIndex = diary.CreateNewEntry();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -86,7 +85,7 @@ namespace zzDiary
         private void MainWindowKeyPress(object sender, KeyPressEventArgs e)
         {
             this.KeyDown += new KeyEventHandler(this.MainWindowKeyDown);
-           
+
         }
 
         private void MainWindowKeyDown(object sender, KeyEventArgs e)
@@ -112,12 +111,14 @@ namespace zzDiary
         {
             diary.SetCurrentYear(Int32.Parse(YearList.SelectedItem.ToString()));
             diary.LoadMonth();
+            CheckContentChange();
         }
 
         private void MonthList_SelectedIndexChanged(object sender, EventArgs e)
         {
             diary.SetCurrentMonth(Int32.Parse(MonthList.SelectedItem.ToString()));
             diary.LoadMonth();
+            CheckContentChange();
         }
 
         public void UpdateYearMonthList(int yearIndex, int monthIndex)
@@ -130,5 +131,36 @@ namespace zzDiary
         {
             diary.SortList();
         }
+
+        private void ContentBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ContentBox == ActiveControl)
+            {
+                if (!contentChanged)
+                {
+                    contentChanged = true;
+                }
+            }
+
+        }
+
+        private void CheckContentChange()
+        {
+            if (contentChanged)
+            {
+                contentChanged = false;
+                diary.SaveEdit(EntryList.SelectedIndex, DayBox.Text, TitleBox.Text, ContentBox.Text);
+            }
+        }
+
+        private void DisplayEntry(int index)
+        {
+            Entry entry = diary.LoadEntry(index);
+            DayBox.Text = entry.Day.ToString("D2");
+            TitleBox.Text = entry.Title;
+            ContentBox.Text = entry.Content;
+        }
+
+
     }
 }
