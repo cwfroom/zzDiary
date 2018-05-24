@@ -50,6 +50,7 @@ namespace zzDiary
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            contentChanged = false;
             diary.SaveEdit(EntryList.SelectedIndex, DayBox.Text, TitleBox.Text, ContentBox.Text);
         }
 
@@ -57,11 +58,23 @@ namespace zzDiary
         {
             if (EntryList.SelectedIndex >=0)
             {
-                CheckContentChange();
-                DisplayEntry(EntryList.SelectedIndex);
-                entryIndex = EntryList.SelectedIndex;    
+                if (entryIndex != EntryList.SelectedIndex)
+                {
+                    CheckContentChange();
+                    DisplayEntry(EntryList.SelectedIndex);
+                    entryIndex = EntryList.SelectedIndex;
+                }
             }
-        }     
+        }
+        
+        private void EntryList_SelectedIndexChanged(object sender,EventArgs e)
+        {
+            if (EntryList.SelectedIndex >= 0)
+            {
+                    DisplayEntry(EntryList.SelectedIndex);
+                    entryIndex = EntryList.SelectedIndex;
+            }
+        }
 
         private void NewButton_Click(object sender, EventArgs e)
         {
@@ -166,16 +179,23 @@ namespace zzDiary
             if (contentChanged)
             {
                 contentChanged = false;
-                diary.SaveEdit(entryIndex, DayBox.Text, TitleBox.Text, ContentBox.Text);
+                //diary.SaveEdit(entryIndex, DayBox.Text, TitleBox.Text, ContentBox.Text);
             }
         }
 
-        private void DisplayEntry(int index)
+        public void DisplayEntry(int index)
         {
             Entry entry = diary.LoadEntry(index);
             DayBox.Text = entry.Day.ToString("D2");
             TitleBox.Text = entry.Title;
             ContentBox.Text = entry.Content;
+        }
+
+        public void DisplayEmpty()
+        {
+            DayBox.Text = "";
+            TitleBox.Text = "";
+            ContentBox.Text = "";
         }
 
     }

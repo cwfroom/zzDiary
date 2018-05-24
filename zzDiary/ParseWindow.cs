@@ -34,6 +34,66 @@ namespace zzDiary
 
         private void ParseButton_Click(object sender, EventArgs e)
         {
+            if (ByTextCheckBox.Checked)
+            {
+                parseFromText();
+            }
+            else
+            {
+                parseFromPath();
+            }
+            
+        }
+
+        private void parseFromText()
+        {
+            string[] paragraphs = LogBox.Text.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string title, content;
+            title = content = string.Empty;
+            int year, month;
+            string day = string.Empty;
+            year = month = 0;
+            for (int i = 0; i < paragraphs.Length; i++)
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(paragraphs[i], @"\[\d{6}\]") || System.Text.RegularExpressions.Regex.IsMatch(paragraphs[i], @"\【\d{6}\】"))
+                {
+                    if (content != string.Empty)
+                    {
+                        diary.SetCurrentYearMonth(year, month);
+                        diary.LoadMonth();
+                        diary.SaveEdit(diary.CreateNewEntry(), day, title, content);
+                        content = string.Empty;
+                    }
+
+                    string [] dateAndTitle = paragraphs[i].Split(dividers);
+                    string date = dateAndTitle[1];
+                    title = dateAndTitle[2];
+                    if (title.ToCharArray()[0] == ' ')
+                    {
+                        title = title.Substring(1, title.Length - 1);
+                    }
+                    year = Int32.Parse(date.Substring(0, 2)) + 2000;
+                    month = Int32.Parse(date.Substring(2, 2));
+                    day = date.Substring(4, 2);
+                }
+                else
+                {
+                    content += paragraphs[i];
+                    content += "\r\n";
+                }
+                
+            }
+
+            int j = 0;
+            diary.SetCurrentYearMonth(year, month);
+            diary.LoadMonth();
+            content = content.Substring(0, content.Length - 2);
+            diary.SaveEdit(diary.CreateNewEntry(), day, title, content);
+            diary.SortList();
+        }
+
+        private void parseFromPath()
+        {
             LogBox.Text = "";
 
             if (YearBox.Text != "" && MonthBox.Text != "")
@@ -91,8 +151,8 @@ namespace zzDiary
                     {
                         title = title.Substring(1);
                     }
-                    
-                    AddLog("Date = " + date);                    
+
+                    AddLog("Date = " + date);
                     AddLog("Day = " + dayInt);
                     AddLog("Title = " + title);
                     AddLog("Extension = " + extension);
@@ -128,7 +188,7 @@ namespace zzDiary
                 {
                     wordApp.Quit();
                 }
-                
+
             }
         }
 

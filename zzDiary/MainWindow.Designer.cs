@@ -61,7 +61,8 @@ namespace zzDiary
             this.EntryList.Name = "EntryList";
             this.EntryList.Size = new System.Drawing.Size(296, 629);
             this.EntryList.TabIndex = 1;
-            this.EntryList.Click += new System.EventHandler(this.EntryList_Click);
+            this.EntryList.SelectedIndexChanged += new System.EventHandler(this.EntryList_SelectedIndexChanged);
+            //this.EntryList.Click += new System.EventHandler(this.EntryList_Click);
             // 
             // TitleBox
             // 

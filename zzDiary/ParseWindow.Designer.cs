@@ -34,13 +34,14 @@
             this.LogBox = new System.Windows.Forms.TextBox();
             this.ParseButton = new System.Windows.Forms.Button();
             this.ChineseCheckBox = new System.Windows.Forms.CheckBox();
+            this.ByTextCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // YearBox
             // 
             this.YearBox.Location = new System.Drawing.Point(13, 13);
             this.YearBox.Name = "YearBox";
-            this.YearBox.Size = new System.Drawing.Size(100, 32);
+            this.YearBox.Size = new System.Drawing.Size(147, 32);
             this.YearBox.TabIndex = 0;
             this.YearBox.Text = "2017";
             // 
@@ -48,17 +49,17 @@
             // 
             this.MonthBox.Location = new System.Drawing.Point(12, 51);
             this.MonthBox.Name = "MonthBox";
-            this.MonthBox.Size = new System.Drawing.Size(100, 32);
+            this.MonthBox.Size = new System.Drawing.Size(148, 32);
             this.MonthBox.TabIndex = 1;
             this.MonthBox.Text = "12";
             // 
             // LogBox
             // 
-            this.LogBox.Location = new System.Drawing.Point(120, 13);
+            this.LogBox.Location = new System.Drawing.Point(166, 13);
             this.LogBox.Multiline = true;
             this.LogBox.Name = "LogBox";
             this.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LogBox.Size = new System.Drawing.Size(652, 536);
+            this.LogBox.Size = new System.Drawing.Size(606, 536);
             this.LogBox.TabIndex = 2;
             // 
             // ParseButton
@@ -76,16 +77,29 @@
             this.ChineseCheckBox.AutoSize = true;
             this.ChineseCheckBox.Location = new System.Drawing.Point(13, 90);
             this.ChineseCheckBox.Name = "ChineseCheckBox";
-            this.ChineseCheckBox.Size = new System.Drawing.Size(104, 29);
+            this.ChineseCheckBox.Size = new System.Drawing.Size(147, 29);
             this.ChineseCheckBox.TabIndex = 4;
-            this.ChineseCheckBox.Text = "Chinese";
+            this.ChineseCheckBox.Text = "ChineseDate";
             this.ChineseCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ByTextCheckBox
+            // 
+            this.ByTextCheckBox.AutoSize = true;
+            this.ByTextCheckBox.Checked = true;
+            this.ByTextCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ByTextCheckBox.Location = new System.Drawing.Point(12, 126);
+            this.ByTextCheckBox.Name = "ByTextCheckBox";
+            this.ByTextCheckBox.Size = new System.Drawing.Size(92, 29);
+            this.ByTextCheckBox.TabIndex = 5;
+            this.ByTextCheckBox.Text = "ByText";
+            this.ByTextCheckBox.UseVisualStyleBackColor = true;
             // 
             // ParseWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.ByTextCheckBox);
             this.Controls.Add(this.ChineseCheckBox);
             this.Controls.Add(this.ParseButton);
             this.Controls.Add(this.LogBox);
@@ -93,7 +107,7 @@
             this.Controls.Add(this.YearBox);
             this.Font = new System.Drawing.Font("Microsoft YaHei", 14F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(800, 600);
             this.MinimizeBox = false;
@@ -112,5 +126,6 @@
         private System.Windows.Forms.TextBox LogBox;
         private System.Windows.Forms.Button ParseButton;
         private System.Windows.Forms.CheckBox ChineseCheckBox;
+        private System.Windows.Forms.CheckBox ByTextCheckBox;
     }
 }

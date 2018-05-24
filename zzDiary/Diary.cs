@@ -167,7 +167,14 @@ namespace zzDiary
                 DisplayList.Add(GetDisplayTitle(entry));
             }
             mainWindow.BindList(DisplayList);
-
+            if (DisplayList.Count > 0)
+            {
+                mainWindow.DisplayEntry(0);
+            }
+            else
+            {
+                mainWindow.DisplayEmpty();
+            }
             mainWindow.UpdateStatus("Loaded from " + currentMonthPath);
         }
 
@@ -202,7 +209,7 @@ namespace zzDiary
 
         public int CreateNewEntry()
         {
-            SetCurrentDate(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            //SetCurrentDate(currentYear, currentMonth, DateTime.Now.Day);
             Entry newEntry = new Entry(currentDay, "", "");
             /*
             int i;
