@@ -193,7 +193,14 @@ namespace zzDiary
 
         public Entry LoadEntry(int index)
         {
-            return currentList.List[index];
+            if (currentList.List.Count > 0)
+            {
+                return currentList.List[index];
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void CreateNewMonth()

@@ -186,9 +186,12 @@ namespace zzDiary
         public void DisplayEntry(int index)
         {
             Entry entry = diary.LoadEntry(index);
-            DayBox.Text = entry.Day.ToString("D2");
-            TitleBox.Text = entry.Title;
-            ContentBox.Text = entry.Content;
+            if (entry != null)
+            {
+                DayBox.Text = entry.Day.ToString("D2");
+                TitleBox.Text = entry.Title;
+                ContentBox.Text = entry.Content;
+            }
         }
 
         public void DisplayEmpty()
