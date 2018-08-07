@@ -160,7 +160,7 @@ namespace zzDiary
 
         private void ContentBox_TextChanged(object sender, EventArgs e)
         {
-            CheckEdit(ContentBox);
+            WordCountLabel.Text = ContentBox.Text.Length.ToString();
         }
 
         private void CheckEdit(Control ctrl)

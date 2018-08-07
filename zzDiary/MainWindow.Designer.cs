@@ -49,6 +49,7 @@ namespace zzDiary
             this.MonthList = new System.Windows.Forms.ListBox();
             this.ParseButton = new System.Windows.Forms.Button();
             this.sortButton = new System.Windows.Forms.Button();
+            this.WordCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +63,6 @@ namespace zzDiary
             this.EntryList.Size = new System.Drawing.Size(296, 629);
             this.EntryList.TabIndex = 1;
             this.EntryList.SelectedIndexChanged += new System.EventHandler(this.EntryList_SelectedIndexChanged);
-            //this.EntryList.Click += new System.EventHandler(this.EntryList_Click);
             // 
             // TitleBox
             // 
@@ -171,6 +171,7 @@ namespace zzDiary
             // 
             this.StatusStrip.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.WordCountLabel,
             this.StatusLabel});
             this.StatusStrip.Location = new System.Drawing.Point(0, 655);
             this.StatusStrip.Name = "StatusStrip";
@@ -221,6 +222,13 @@ namespace zzDiary
             this.sortButton.Text = "Sort";
             this.sortButton.UseVisualStyleBackColor = true;
             this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
+            // 
+            // WordCountLabel
+            // 
+            this.WordCountLabel.Name = "WordCountLabel";
+            this.WordCountLabel.Size = new System.Drawing.Size(99, 21);
+            this.WordCountLabel.Text = "WordCount";
+            this.WordCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // MainWindow
             // 
@@ -281,6 +289,7 @@ namespace zzDiary
         private ListBox MonthList;
         private Button ParseButton;
         private Button sortButton;
+        private ToolStripStatusLabel WordCountLabel;
     }
 }
 
