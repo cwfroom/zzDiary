@@ -43,7 +43,7 @@
             this.YearBox.Name = "YearBox";
             this.YearBox.Size = new System.Drawing.Size(147, 32);
             this.YearBox.TabIndex = 0;
-            this.YearBox.Text = "2017";
+            this.YearBox.Text = "2002";
             // 
             // MonthBox
             // 

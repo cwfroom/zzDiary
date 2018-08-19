@@ -19,7 +19,8 @@ namespace zzDiary
     {
         private Diary diary;
         private const string parsePath = "D:\\Dropbox\\Diary";
-        private char[] dividers = { '[', ']', '【', '】' };
+        private char[] dividers = { '[', ']', '【', '】'};
+        private char[] chnDiviers = { '年', '月', '日', '\t', ' ' };
         private string[] chineseMonth = {
             "一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"
         };
@@ -55,7 +56,7 @@ namespace zzDiary
             year = month = 0;
             for (int i = 0; i < paragraphs.Length; i++)
             {
-                if (System.Text.RegularExpressions.Regex.IsMatch(paragraphs[i], @"\[\d{6}\]") || System.Text.RegularExpressions.Regex.IsMatch(paragraphs[i], @"\【\d{6}\】"))
+                if (isSixDigitDate(paragraphs[i]))
                 {
                     if (content != string.Empty)
                     {
@@ -75,6 +76,49 @@ namespace zzDiary
                     year = Int32.Parse(date.Substring(0, 2)) + 2000;
                     month = Int32.Parse(date.Substring(2, 2));
                     day = date.Substring(4, 2);
+                }else if (isYMDDate(paragraphs[i]))
+                {
+                    
+                    string[] dateSplit = paragraphs[i].Split(chnDiviers);
+                    int year_parsed = Int32.Parse(dateSplit[0]);
+                    
+                    if (YearBox.Text != string.Empty && year_parsed >= Int32.Parse(YearBox.Text))
+                    {
+                        if (content != string.Empty)
+                        {
+                            diary.SetCurrentYearMonth(year, month);
+                            diary.LoadMonth();
+                            diary.SaveEdit(diary.CreateNewEntry(), day, title, content);
+                            content = string.Empty;
+                        }
+
+                        year = year_parsed;
+                        month = Int32.Parse(dateSplit[1]);
+                        day = dateSplit[2];
+                        title = paragraphs[i];
+                        title = title.Replace('\t', ' ');
+                    }
+                    
+                }else if (isMDDate(paragraphs[i]))
+                {
+                    string[] dateSplit = paragraphs[i].Split(chnDiviers);
+                    
+                    if (YearBox.Text != string.Empty)
+                    {
+                        if (content != string.Empty)
+                        {
+                            diary.SetCurrentYearMonth(year, month);
+                            diary.LoadMonth();
+                            diary.SaveEdit(diary.CreateNewEntry(), day, title, content);
+                            content = string.Empty;
+                        }
+
+                        year = Int32.Parse(YearBox.Text);
+                        month = Int32.Parse(dateSplit[0]);
+                        day = dateSplit[1];
+                        title = paragraphs[i];
+                        title = title.Replace('\t', ' ');
+                    }
                 }
                 else
                 {
@@ -84,12 +128,30 @@ namespace zzDiary
                 
             }
 
-            int j = 0;
-            diary.SetCurrentYearMonth(year, month);
-            diary.LoadMonth();
-            content = content.Substring(0, content.Length - 2);
-            diary.SaveEdit(diary.CreateNewEntry(), day, title, content);
-            diary.SortList();
+            if (year != 0 && month != 0)
+            {
+                diary.SetCurrentYearMonth(year, month);
+                diary.LoadMonth();
+                content = content.Substring(0, content.Length - 2);
+                diary.SaveEdit(diary.CreateNewEntry(), day, title, content);
+                diary.SortList();
+            }
+
+        }
+
+        private bool isSixDigitDate(string str)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(str, @"\[\d{6}\]") || System.Text.RegularExpressions.Regex.IsMatch(str, @"\【\d{6}\】");
+        }
+
+        private bool isYMDDate(string str)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(str, @"^\d{4}年\d{1,2}月\d{1,2}日");
+        }
+
+        private bool isMDDate(string str)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(str, @"^\d{1,2}月\d{1,2}日");
         }
 
         private void parseFromPath()
