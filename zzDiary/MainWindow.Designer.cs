@@ -44,12 +44,11 @@ namespace zzDiary
             this.DownButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
+            this.WordCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.YearList = new System.Windows.Forms.ListBox();
             this.MonthList = new System.Windows.Forms.ListBox();
-            this.ParseButton = new System.Windows.Forms.Button();
             this.sortButton = new System.Windows.Forms.Button();
-            this.WordCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,7 +118,7 @@ namespace zzDiary
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(1067, 601);
+            this.SaveButton.Location = new System.Drawing.Point(1117, 601);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(91, 40);
             this.SaveButton.TabIndex = 9;
@@ -129,7 +128,7 @@ namespace zzDiary
             // 
             // NewButton
             // 
-            this.NewButton.Location = new System.Drawing.Point(1067, 370);
+            this.NewButton.Location = new System.Drawing.Point(1117, 370);
             this.NewButton.Name = "NewButton";
             this.NewButton.Size = new System.Drawing.Size(91, 40);
             this.NewButton.TabIndex = 5;
@@ -139,7 +138,7 @@ namespace zzDiary
             // 
             // UpButton
             // 
-            this.UpButton.Location = new System.Drawing.Point(1067, 416);
+            this.UpButton.Location = new System.Drawing.Point(1117, 416);
             this.UpButton.Name = "UpButton";
             this.UpButton.Size = new System.Drawing.Size(91, 40);
             this.UpButton.TabIndex = 6;
@@ -149,7 +148,7 @@ namespace zzDiary
             // 
             // DownButton
             // 
-            this.DownButton.Location = new System.Drawing.Point(1067, 462);
+            this.DownButton.Location = new System.Drawing.Point(1117, 462);
             this.DownButton.Name = "DownButton";
             this.DownButton.Size = new System.Drawing.Size(91, 40);
             this.DownButton.TabIndex = 7;
@@ -159,7 +158,7 @@ namespace zzDiary
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(1067, 508);
+            this.DeleteButton.Location = new System.Drawing.Point(1117, 508);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(91, 40);
             this.DeleteButton.TabIndex = 8;
@@ -178,6 +177,13 @@ namespace zzDiary
             this.StatusStrip.Size = new System.Drawing.Size(1264, 26);
             this.StatusStrip.TabIndex = 10;
             this.StatusStrip.Text = "Status";
+            // 
+            // WordCountLabel
+            // 
+            this.WordCountLabel.Name = "WordCountLabel";
+            this.WordCountLabel.Size = new System.Drawing.Size(99, 21);
+            this.WordCountLabel.Text = "WordCount";
+            this.WordCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // StatusLabel
             // 
@@ -203,19 +209,9 @@ namespace zzDiary
             this.MonthList.Size = new System.Drawing.Size(80, 304);
             this.MonthList.TabIndex = 12;
             // 
-            // ParseButton
-            // 
-            this.ParseButton.Location = new System.Drawing.Point(1169, 601);
-            this.ParseButton.Name = "ParseButton";
-            this.ParseButton.Size = new System.Drawing.Size(91, 40);
-            this.ParseButton.TabIndex = 13;
-            this.ParseButton.Text = "Parse";
-            this.ParseButton.UseVisualStyleBackColor = true;
-            this.ParseButton.Click += new System.EventHandler(this.ParseButton_Click);
-            // 
             // sortButton
             // 
-            this.sortButton.Location = new System.Drawing.Point(1067, 555);
+            this.sortButton.Location = new System.Drawing.Point(1117, 555);
             this.sortButton.Name = "sortButton";
             this.sortButton.Size = new System.Drawing.Size(91, 40);
             this.sortButton.TabIndex = 14;
@@ -223,20 +219,12 @@ namespace zzDiary
             this.sortButton.UseVisualStyleBackColor = true;
             this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
             // 
-            // WordCountLabel
-            // 
-            this.WordCountLabel.Name = "WordCountLabel";
-            this.WordCountLabel.Size = new System.Drawing.Size(99, 21);
-            this.WordCountLabel.Text = "WordCount";
-            this.WordCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.sortButton);
-            this.Controls.Add(this.ParseButton);
             this.Controls.Add(this.MonthList);
             this.Controls.Add(this.YearList);
             this.Controls.Add(this.StatusStrip);
@@ -287,7 +275,6 @@ namespace zzDiary
         private ToolStripStatusLabel StatusLabel;
         private ListBox YearList;
         private ListBox MonthList;
-        private Button ParseButton;
         private Button sortButton;
         private ToolStripStatusLabel WordCountLabel;
     }
