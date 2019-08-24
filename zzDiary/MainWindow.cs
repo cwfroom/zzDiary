@@ -115,12 +115,6 @@ namespace zzDiary
             StatusLabel.Text = status + " " + DateTime.Now.ToLongTimeString();
         }
 
-        private void ParseButton_Click(object sender, EventArgs e)
-        {
-            ParseWindow pw = new ParseWindow(diary);
-            pw.ShowDialog();
-        }
-
         private void YearList_SelectedIndexChanged(object sender, EventArgs e)
         {
             diary.SetCurrentYear(Int32.Parse(YearList.SelectedItem.ToString()));
