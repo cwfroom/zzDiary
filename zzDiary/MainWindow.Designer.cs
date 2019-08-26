@@ -51,7 +51,7 @@ namespace zzDiary
             this.SortButton = new System.Windows.Forms.Button();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.DiaryPage = new System.Windows.Forms.TabPage();
-            this.RecordPage = new System.Windows.Forms.TabPage();
+            this.LogbookPage = new System.Windows.Forms.TabPage();
             this.StatusStrip.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.DiaryPage.SuspendLayout();
@@ -227,7 +227,7 @@ namespace zzDiary
             // TabControl
             // 
             this.TabControl.Controls.Add(this.DiaryPage);
-            this.TabControl.Controls.Add(this.RecordPage);
+            this.TabControl.Controls.Add(this.LogbookPage);
             this.TabControl.Location = new System.Drawing.Point(0, -1);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
@@ -258,15 +258,15 @@ namespace zzDiary
             this.DiaryPage.TabIndex = 0;
             this.DiaryPage.Text = "Diary";
             // 
-            // RecordPage
+            // LogbookPage
             // 
-            this.RecordPage.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.RecordPage.Location = new System.Drawing.Point(4, 30);
-            this.RecordPage.Name = "RecordPage";
-            this.RecordPage.Padding = new System.Windows.Forms.Padding(3);
-            this.RecordPage.Size = new System.Drawing.Size(1141, 510);
-            this.RecordPage.TabIndex = 1;
-            this.RecordPage.Text = "Record";
+            this.LogbookPage.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.LogbookPage.Location = new System.Drawing.Point(4, 30);
+            this.LogbookPage.Name = "LogbookPage";
+            this.LogbookPage.Padding = new System.Windows.Forms.Padding(3);
+            this.LogbookPage.Size = new System.Drawing.Size(1141, 510);
+            this.LogbookPage.TabIndex = 1;
+            this.LogbookPage.Text = "Logbook";
             // 
             // MainWindow
             // 
@@ -318,7 +318,7 @@ namespace zzDiary
         private ToolStripStatusLabel WordCountLabel;
         private TabControl TabControl;
         private TabPage DiaryPage;
-        private TabPage RecordPage;
+        private TabPage LogbookPage;
     }
 }
 
