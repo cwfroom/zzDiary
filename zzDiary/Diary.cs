@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.ComponentModel;
@@ -13,6 +10,7 @@ namespace zzDiary
     public class Config {
         public string DataPath { get; set; }
         public int FirstYear { get; set; }
+        public string LogBook { get; set; }
     }
 
     public class Entry {
@@ -77,7 +75,7 @@ namespace zzDiary
         private int[] monthList;
 
         private MainWindow mainWindow;
-        
+        public Logbook logbook;
 
         public Diary()
         {
@@ -104,9 +102,10 @@ namespace zzDiary
         }
 
     
-        public Form InitializeUI()
+        public Form Initialize()
         {
             mainWindow = new MainWindow(this);
+            logbook = new Logbook(mainWindow, config.LogBook);
             return mainWindow;
         }
 

@@ -52,9 +52,13 @@ namespace zzDiary
             this.TabControl = new System.Windows.Forms.TabControl();
             this.DiaryPage = new System.Windows.Forms.TabPage();
             this.LogbookPage = new System.Windows.Forms.TabPage();
+            this.CategoryList = new System.Windows.Forms.ListBox();
+            this.LogbookGrid = new System.Windows.Forms.DataGridView();
             this.StatusStrip.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.DiaryPage.SuspendLayout();
+            this.LogbookPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LogbookGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // EntryList
@@ -261,12 +265,33 @@ namespace zzDiary
             // LogbookPage
             // 
             this.LogbookPage.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.LogbookPage.Controls.Add(this.LogbookGrid);
+            this.LogbookPage.Controls.Add(this.CategoryList);
             this.LogbookPage.Location = new System.Drawing.Point(4, 30);
             this.LogbookPage.Name = "LogbookPage";
             this.LogbookPage.Padding = new System.Windows.Forms.Padding(3);
             this.LogbookPage.Size = new System.Drawing.Size(1141, 510);
             this.LogbookPage.TabIndex = 1;
             this.LogbookPage.Text = "Logbook";
+            // 
+            // CategoryList
+            // 
+            this.CategoryList.FormattingEnabled = true;
+            this.CategoryList.ItemHeight = 21;
+            this.CategoryList.Location = new System.Drawing.Point(4, 0);
+            this.CategoryList.Name = "CategoryList";
+            this.CategoryList.Size = new System.Drawing.Size(141, 508);
+            this.CategoryList.TabIndex = 0;
+            // 
+            // LogbookGrid
+            // 
+            this.LogbookGrid.AllowUserToOrderColumns = true;
+            this.LogbookGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.LogbookGrid.Location = new System.Drawing.Point(152, 0);
+            this.LogbookGrid.Name = "LogbookGrid";
+            this.LogbookGrid.RowTemplate.Height = 21;
+            this.LogbookGrid.Size = new System.Drawing.Size(908, 510);
+            this.LogbookGrid.TabIndex = 1;
             // 
             // MainWindow
             // 
@@ -284,6 +309,7 @@ namespace zzDiary
             this.MaximumSize = new System.Drawing.Size(1165, 611);
             this.MinimumSize = new System.Drawing.Size(1165, 611);
             this.Name = "MainWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "zzDiary";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainWindowKeyPress);
@@ -292,6 +318,8 @@ namespace zzDiary
             this.TabControl.ResumeLayout(false);
             this.DiaryPage.ResumeLayout(false);
             this.DiaryPage.PerformLayout();
+            this.LogbookPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.LogbookGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,6 +347,8 @@ namespace zzDiary
         private TabControl TabControl;
         private TabPage DiaryPage;
         private TabPage LogbookPage;
+        private ListBox CategoryList;
+        private DataGridView LogbookGrid;
     }
 }
 

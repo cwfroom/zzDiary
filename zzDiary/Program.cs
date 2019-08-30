@@ -17,7 +17,7 @@ namespace zzDiary
             Diary diary = new Diary();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(diary.InitializeUI());
+            Application.Run(diary.Initialize());
         }
     }
 }
